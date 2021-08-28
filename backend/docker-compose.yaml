@@ -1,0 +1,25 @@
+version: '3'
+services:
+  vitrocar:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: vitrocar/api
+    ports:
+      - '8080:8080'
+      - '5005:5005'
+    environment:
+      - ADDITIONAL_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xmx1G -Xms128m -XX:MaxMetaspaceSize=128m
+    links:
+      - db
+  db:
+    image: postgres:10.5
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB= vitrocar_db
+      - POSTGRES_PASSWORD= postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
