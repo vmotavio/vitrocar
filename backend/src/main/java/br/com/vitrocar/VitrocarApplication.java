@@ -44,7 +44,7 @@ public class VitrocarApplication {
 			}
 			if (carRepository.findByName("GOL") == null) {
 				Car gol = new Car();
-				gol.setName("GOL")
+				gol.setName("GOL");
 				gol.setModel("Bolinha");
 				gol.setBrand("WV");
 				gol.setUser(userRepository.findByUsername("admin").orElse(null));

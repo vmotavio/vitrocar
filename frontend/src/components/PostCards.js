@@ -17,6 +17,9 @@ const PostGrid = () => {
             <Card key={id} style={cardStyle}>
                 <img src="https://i0.statig.com.br/bancodeimagens/1z/x4/9z/1zx49zbey799avacjh7509lv0.jpg" width="100%" height="200px" alt=""></img>
                 <CardContent>
+                    <TextField record={data[id]} source="name" />
+                </CardContent>
+                <CardContent>
                     Marca: <TextField record={data[id]} source="brand" />
                 </CardContent>
                 <CardContent>
