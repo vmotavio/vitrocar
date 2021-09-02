@@ -1,6 +1,8 @@
 package br.com.vitrocar;
 
+import br.com.vitrocar.model.Car;
 import br.com.vitrocar.model.User;
+import br.com.vitrocar.repository.CarRepository;
 import br.com.vitrocar.repository.UserRepository;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,30 +28,39 @@ public class VitrocarApplication {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
+	CarRepository carRepository;
+	@Autowired
 	PasswordEncoder encoder;
-
-	public static void main(String[] args) {
-		SpringApplication.run(VitrocarApplication.class, args);
-	}
-
-	@Bean
-	public PasswordEncoder getPasswordEncoder(){
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
-	}
 	@Bean
 	public SmartInitializingSingleton importProcessor() {
 		return () -> {
-			if (userRepository.findByUsername("admin")==null) {
+			System.out.println("oiiiiiiiiiiiiiiiii");
+			if (userRepository.findByUsername("admin").isEmpty()) {
 				User admin = new User();
 				admin.setUsername("admin");
 				admin.setPassword("admin");
 				admin.setPassword(encoder.encode(admin.getPassword()));
 				userRepository.save(admin);
 			}
+			if (carRepository.findByName("GOL") == null) {
+				Car gol = new Car();
+				gol.setName("GOL")
+				gol.setModel("Bolinha");
+				gol.setBrand("WV");
+				gol.setUser(userRepository.findByUsername("admin").orElse(null));
+				carRepository.save(gol);
+			}
 		};
-
 	}
+		@Bean
+		public PasswordEncoder getPasswordEncoder(){
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			return encoder;
+		}
+	public static void main(String[] args) {
+		SpringApplication.run(VitrocarApplication.class, args);
+	}
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {

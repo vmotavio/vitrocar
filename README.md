@@ -12,12 +12,18 @@ Nesta prova foi pedido que fizesse as seguintes funcionalidades:
 * Conter o README explicando o passo a passo da funcionalidade do projeto; (OK)
 
 
+Para executar o banco de dados PostgreSQL, digite o seguinte comando:
+
+```shell script
+docker-compose up
+```
+
 Para executar o back-end, digite o seguinte comando:
 
 ```shell script
 cd backend 
-mvn clear install
-mvn spring-boot:run 
+.\mvnw clean install
+.\mvnw spring-boot:run 
 ```
 
 Para executar o front-end, digite o seguinte comando:
@@ -32,21 +38,25 @@ Após executar o comando acima, basta apenas abrir o seguinte endereço e visual
 
 ```
 http://localhost:3000
+
+Usuário: admin
+Senha: admin
 ```
 
 Foram utilizados as seguintes tecnologias:
 
+* Docker.
 * Intellj IDEA Community Edition.
 * Java 11.
 * Maven.
-* Spring Boot
-* Spring Security
-* JWT
-* API REST
+* Spring Boot.
+* Spring Security.
+* JWT.
+* API REST.
 * GIT.
-* POSTGRESQL
-* ReactJS
-* React-Admin
+* POSTGRESQL.
+* ReactJS.
+* React-Admin.
 
 
 
