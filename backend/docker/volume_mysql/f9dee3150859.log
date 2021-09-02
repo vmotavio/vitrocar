@@ -1,5 +1,0 @@
-mysqld, Version: 5.6.51-log (MySQL Community Server (GPL)). started with:
-Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
-Time                 Id Command    Argument
-210827 17:12:17	    1 Connect	root@172.18.0.2 on vitrocar_db
-		    1 Connect	Access denied for user 'root'@'172.18.0.2' (using password: YES)

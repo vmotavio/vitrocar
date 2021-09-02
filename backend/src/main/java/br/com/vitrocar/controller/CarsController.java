@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/car")
+@RequestMapping("/api/v1/allcars")
 @CrossOrigin
-public class CarController {
+public class CarsController {
 
     private final CarRepository carRepository;
     private final UserRepository userRepository;
-    public CarController (CarRepository carRepository, UserRepository userRepository){
+    public CarsController (CarRepository carRepository, UserRepository userRepository){
         this.carRepository = carRepository;
         this.userRepository = userRepository;
     }
@@ -43,39 +43,4 @@ public class CarController {
                 .body(cars);
     }
 
-    public List<Car> findAllByUser(@RequestBody User user){
-        var cars = carRepository.findByUser(user)
-                .stream()
-                .sorted(Comparator.comparing(Car::getName))
-                .collect(Collectors.toList());;
-        return cars;
-    }
-
-    @GetMapping("/{id}")
-    public Car findById(@PathVariable("id") Long id){
-        var car = carRepository.getById(id);
-        return car;
-    }
-
-    @PostMapping("")
-    public void save(@RequestBody Car car, Authentication authentication){
-        User user = userRepository.findByUsername(authentication.getName()).orElse(null);
-        car.setUser(user);
-        carRepository.save(car);
-    }
-
-    @PutMapping("/{id}")
-    public void update(@PathVariable long id , @RequestBody Car car, Authentication authentication) {
-        var oldCar= carRepository.getById(id);
-        var user = userRepository.findByUsername(authentication.getName()).orElse(null);
-        oldCar.setBrand(car.getBrand());
-        oldCar.setModel(car.getModel());
-        oldCar.setName(car.getName());
-        oldCar.setUser(user);
-        carRepository.save(car);
-    }
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        carRepository.delete(carRepository.getById(id));
-    }
 }
