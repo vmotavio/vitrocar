@@ -29,6 +29,7 @@ cd backend
 Para executar o front-end, digite o seguinte comando:
 
 ```shell script
+cd ..
 cd frontend 
 npm install
 npm start
